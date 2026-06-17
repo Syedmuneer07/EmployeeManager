@@ -1,5 +1,5 @@
 // API Base URL
-const API_URL = 'https://employeemanagementserver-0ff8.onrender.com/';
+const API_URL = 'https://employeemanagementserver-0ff8.onrender.com';
 let currentEmployeeId = null;
 let employeeList = [];
 let updateOriginalData = {};
