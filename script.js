@@ -1,7 +1,7 @@
 // API Base URL
 const API_URL = 'https://employeemanagementserver-0ff8.onrender.com';
 function apiUrl(path) {
-    return `${API_URL}/${path.replace(/^\/+/, '')}`;
+    return `${API_URL}${path}`;
 }
 let currentEmployeeId = null;
 let employeeList = [];
