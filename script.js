@@ -1,5 +1,8 @@
 // API Base URL
-const API_URL = 'https://employeemanagementserver-0ff8.onrender.com';
+const API_URL = 'https://employeemanagementserver-0ff8.onrender.com'.replace(/\/++$/, '');
+function apiUrl(path) {
+    return `${API_URL}/${path.replace(/^\/+/, '')}`;
+}
 let currentEmployeeId = null;
 let employeeList = [];
 let updateOriginalData = {};
@@ -58,7 +61,7 @@ function closeDeleteModal() {
 async function loadEmployees() {
     showLoading(true);
     try {
-    const response = await fetch(`${API_URL}/getAll`);
+    const response = await fetch(apiUrl('/getAll'));
     await handleResponse(response);
     const data = await response.json();
     console.log("Fetched employee list:", data);
@@ -144,7 +147,7 @@ document.getElementById('empForm').addEventListener('submit', async (e) => {
     }
 
     try {
-    const response = await fetch(`${API_URL}/addEmp`, {
+    const response = await fetch(apiUrl('/addEmp'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: newId, username, email, phonenumber: phone, designation, employeeId: newEmployeeId })
@@ -167,7 +170,7 @@ function resetForm() {
 // Confirm Employee Deletion
 async function confirmDelete() {
     try {
-    const response = await fetch(`${API_URL}/deleteEmp/${currentEmployeeId}`, { method: 'DELETE' });
+    const response = await fetch(apiUrl(`/deleteEmp/${currentEmployeeId}`), { method: 'DELETE' });
     await handleResponse(response);
     showToast('Employee deleted successfully');
     closeDeleteModal();
@@ -200,7 +203,7 @@ async function confirmUpdate() {
     }
 
     try {
-    const response = await fetch(`${API_URL}/updateEmp/${currentEmployeeId}`, {
+    const response = await fetch(apiUrl(`/updateEmp/${currentEmployeeId}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: newUsername, phonenumber: newPhone, designation: newDesignation })
