@@ -1,5 +1,5 @@
 // API Base URL
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://employeemanagementserver-aux2.onrender.com';
 let currentEmployeeId = null;
 let employeeList = [];
 let updateOriginalData = {};
